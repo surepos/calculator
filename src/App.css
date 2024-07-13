@@ -1,38 +1,216 @@
+body {
+  /* background-color: #3F506D; */
+  margin: 0%;
+  padding: 0%;
+}
+#root {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  width: 90%;
+  height: 90%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+/* Color Changer */
+
+.colorMode {
+  align-self: end;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.colorMode label {
+  width: 150px;
+  height: 60px;
+  position: relative;
+  display: block;
+  background-color: #414345;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.colorMode label::after {
+  content: '';
+  width: 55px;
+  height: 55px;
+  position: absolute;
+  top: 2.5px;
+  left: 2.5px;
+  background: #abbaab;
+  border-radius: 20px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.4);
+  transition: 0.3s;
+}
+.colorMode input {
+  width: 0;
+  height: 0;
+  visibility: hidden;
+}
+.colorMode input:checked + label {
+  background-color: #abbaab;
+}
+
+.colorMode input:checked + label::after {
+  left: 147.5px;
+  transform: translateX(-100%);
+  background: #414345;
+}
+.colorMode label:active::after {
+  width: 80px;
+}
+.colorMode label svg {
+  position: absolute;
+  width: 40px;
+  top: 10px;
+  z-index: 100;
+  height: auto;
+}
+.colorMode label svg.night {
+  left: 10px;
+  fill: #eeeeee;
+  transition: 0.3s;
+}
+.colorMode label svg.sun {
+  left: 100px;
+  fill: #7e7e7e;
+  transition: 0.3s;
+}
+.colorMode input:checked + label svg.night {
+  fill: #7e7e7e;
+}
+.colorMode input:checked + label svg.sun {
+  fill: #eeeeee;
+}
+
+/* Calculator Body */
+
+.calculatorBody {
+  background-color: #1d1e23;
+  width: 350px;
+  max-width: 90%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 40px;
+  &.lightBackground {
+    background-color: #ffffff;
+}
+}
+
+.calculatorBody .lightBackground .buttonContainer .eachButton {
+  &.operatorPressed {
+      color: #f73d93;
+      background-color: #131111;
   }
-  to {
-    transform: rotate(360deg);
+}
+.calculatorBody .resultSection {
+  width: 95%;
+  height: 23%;
+  background-color: rgba(0, 0, 0, 0.5);
+  margin-top: 10px;
+  border-radius: 40px;
+  color: #ffffff;
+  font-family: 'Saira', sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  justify-content: end;
+}
+.lightBackground .resultSection {
+  color: #0D0D0D;
+}
+.calculatorBody .resultSection .resultDisplay {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  justify-content: end;
+  margin: 15px 15px;
+}
+.calculatorBody .resultSection .calcHistory {
+  font-size: 0.7rem;
+}
+.calculatorBody .resultSection .calcHistory span {
+  color: #f73d93;
+}
+.calculatorBody .buttonContainer {
+  height: 70%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 60px);
+  grid-template-rows: repeat(5, 60px);
+  gap: 20px;
+  justify-content: center;
+  align-content: center;
+  background-color: #2a2d37;
+  border-radius: 40px;
+  padding: 5px 0px 8px 0px;
+}
+.lightBackground .resultSection {
+  background-color: rgba(65, 59, 59, 0.1);
+}
+.lightBackground .buttonContainer {
+  background-color: #f4f0f0;
+}
+
+.calculatorBody .buttonContainer .eachButton {
+  background: #21252d;
+  color: #f4eee0;
+  padding: 20px;
+  font-size: 1.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  font-family: 'Saira', sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  transition: all 0.2s ease;
+  &.greenColor {
+    background: #03c988;
+  }
+  &.redColor {
+    background: #f73d93;
+    &.operatorPressed{
+      color: #0D0D0D;
+      background-color: #bab9bb;
+    }
+  }
+  & img {
+    width: 25px;
+  }
+  &.operatorPressed{
+    color: #f73d93;
+    background-color: #eeeeee;
+  }
+}
+.calculatorBody .buttonContainer .eachButton:hover {
+  transform: scale(1.1);
+  box-shadow: 0 2px #1a1919;
+  transform: translateY(2px);
+}
+
+@media (max-width: 600px) {
+  .App {
+    gap: 50px;
+  }
+  .colorMode {
+    align-self: center;
+  }
+  .calculatorBody .buttonContainer {
+    height: 65%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 55px);
+    grid-template-rows: repeat(5, 55px);
   }
 }
